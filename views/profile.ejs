@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="antialiased bg-zinc-900 text-gray-100 font-sans">
+    <div class="relative min-h-screen overflow-hidden bg-zinc-900">
+      <div class="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
+        <a
+          href="/logout"
+          class="inline-flex items-center justify-center rounded-full border border-white/10 bg-zinc-800/80 px-4 py-2 text-sm font-semibold text-zinc-200 shadow-lg shadow-black/30 backdrop-blur-sm transition hover:border-red-400/40 hover:bg-red-500/10 hover:text-red-200 active:scale-95"
+        >
+          Logout
+        </a>
+      </div>
+      <div class="relative z-10 flex min-h-screen items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+        <div class="w-full max-w-2xl rounded-3xl border border-white/10 bg-zinc-800/70 p-6 shadow-2xl shadow-black/40 backdrop-blur-sm sm:p-8">
+          <div class="mb-8 text-center">
+            <h3 class="text-3xl sm:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 tracking-tight drop-shadow">
+              Hello <%= user.name %> ❤️
+            </h3>
+            <p class="mt-3 text-sm sm:text-base text-zinc-300">
+              You can create a new post from here.
+            </p>
+          </div>
+
+          <form action="/post" method="POST" class="space-y-4">
+            <label for="post" class="block text-sm font-medium text-zinc-200">
+              Share your thoughts
+            </label>
+            <textarea
+              id="post"
+              name="content"
+              placeholder="What is on your mind?"
+              rows="6"
+              class="w-full resize-none rounded-2xl border border-white/10 bg-zinc-700/50 p-4 text-white placeholder-zinc-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
+            ></textarea>
+
+            <div class="flex items-center justify-between gap-4">
+            
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-xl bg-blue-500 px-5 py-3 font-semibold text-white transition hover:bg-blue-600 active:scale-95"
+              >
+                Upload Post
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="posts relative z-10 mx-auto mt-10 w-full max-w-5xl px-4 pb-10 sm:px-6 lg:px-8">
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-zinc-400">Your Posts</h3>
+        <div class="postcontainer grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <% if(user.posts.length > 0){ %>
+            <% user.posts.reverse().forEach((post)=>{ %>
+
+              <div class="post rounded-3xl border border-white/10 bg-zinc-800/70 p-5 shadow-lg shadow-black/20 backdrop-blur-sm transition hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-blue-500/10">
+                <h4 class="text-sm font-semibold text-blue-400">@<%= user.username %></h4>
+                <p class="mt-3 text-sm leading-6 tracking-tight text-zinc-300"><%= post.content %></p>
+                <small> <%=post.likes.length %> likes</small>
+                <div class="btns mt-5 flex items-center gap-4 text-sm font-medium">
+                  <a class="text-blue-400 transition hover:text-blue-300" href="/like/<%= post._id %>">
+                    <%= post.likes.indexOf(user._id) === -1 ? "Like" : "Unlike" %>
+                  </a>
+                  <a class="text-zinc-300 transition hover:text-white" href="/edit/<%= post._id %>">Edit</a>
+                </div>
+              </div>
+           <% }) %>
+          <% } else { %>
+            <p class="text-sm text-zinc-500">No posts yet. Create your first one above.</p>
+          <% } %>
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+</html>

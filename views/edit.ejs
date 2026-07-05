@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="antialiased bg-zinc-900 text-gray-100 font-sans">
+    <div class="relative min-h-screen overflow-hidden bg-zinc-900">
+      <div class="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
+        <a
+          href="/profile"
+          class="inline-flex items-center justify-center rounded-full border border-white/10 bg-zinc-800/80 px-4 py-2 text-sm font-semibold text-zinc-200 shadow-lg shadow-black/30 backdrop-blur-sm transition hover:border-red-400/40 hover:bg-red-500/10 hover:text-red-200 active:scale-95"
+        >
+          back
+        </a>
+      </div>
+      <div class="relative z-10 flex min-h-screen items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+        <div class="w-full max-w-2xl rounded-3xl border border-white/10 bg-zinc-800/70 p-6 shadow-2xl shadow-black/40 backdrop-blur-sm sm:p-8">
+          <div class="mb-8 text-center">
+            <h3 class="text-3xl sm:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 tracking-tight drop-shadow">
+              Update your post !
+            </h3>
+            <p class="mt-3 text-sm sm:text-base text-zinc-300">
+              You can edit your existing post here.
+            </p>
+          </div>
+
+          <form action="/update/<%= post._id %>" method="POST" class="space-y-4">
+            <textarea
+              id="post"
+              name="content"
+              rows="6"
+              class="w-full resize-none rounded-2xl border border-white/10 bg-zinc-700/50 p-4 text-white placeholder-zinc-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
+            > <%= post.content %> </textarea>
+
+            <div class="flex items-center justify-between gap-4">
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-xl bg-blue-500 px-5 py-3 font-semibold text-white transition hover:bg-blue-600 active:scale-95"
+              >
+                Update Post
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
