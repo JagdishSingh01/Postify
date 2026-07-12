@@ -18,9 +18,15 @@
       <div class="relative z-10 flex min-h-screen items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
         <div class="w-full max-w-2xl rounded-3xl border border-white/10 bg-zinc-800/70 p-6 shadow-2xl shadow-black/40 backdrop-blur-sm sm:p-8">
           <div class="mb-8 text-center">
-            <h3 class="text-3xl sm:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 tracking-tight drop-shadow">
-              Hello <%= user.name %> ❤️
-            </h3>
+
+            <div class="flex items-center justify-center gap-3">
+              <div class="w-10 h-10 bg-red-500 rounded-md">
+                <img onclick="window.location.href='/profile/upload'" class="w-full h-full object-cover rounded-md" src="/images/uploads/<%= user.profilepic %>" alt="Profile Picture" />
+              </div>
+              <h3 class="text-3xl sm:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 tracking-tight drop-shadow">
+                Hello, <%= user.name %>
+              </h3>
+            </div>
             <p class="mt-3 text-sm sm:text-base text-zinc-300">
               You can create a new post from here.
             </p>
